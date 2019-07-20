@@ -1,0 +1,4 @@
+venv/
+.idea/
+email_api.txt
+__pycache__/
