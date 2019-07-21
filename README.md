@@ -1,5 +1,3 @@
-# Numbers
-
 The whole idea is to get numbers to bet with.
 
 
@@ -40,7 +38,5 @@ Output file to be emailed to the email provided:
 23 43 23 4 55
 23 34 34 53 44
 ~~~
-
-
 
 Email to be send at `11.00` and again at `17.00` however the numbers should be randomised on every email.
