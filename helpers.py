@@ -33,13 +33,26 @@ class Email(object):
             print(e.message)
 
 
+class Utils(object):
+    @staticmethod
+    def to_string(number):
+        switch = {
+            1: "1 Number",
+            2: "2 Numbers",
+            3: "3 Numbers",
+            4: "4 Numbers",
+            5: "5 Numbers"
+        }
+        return switch.get(number, "Invalid number")
+
+
 class Numbers(object):
-    def __init__(self, list_of_numbers, group):
+    def __init__(self, list_of_numbers, groups):
         self.__list_of_numbers = list_of_numbers
         self.__list_of_numbers.sort()
-        self.group = group
+        self.groups = groups
 
-        self.res = []
+        self.res = {}
         self.__permutate_numbers()
 
     def get_numbers(self):
@@ -47,27 +60,30 @@ class Numbers(object):
 
     def __permutate_numbers(self):
         start = 0
-        n_num = 1
-        nums = self.__list_of_numbers[start:self.group]
-        self.res.append(nums)
-        position_for_new_n = self.group
-        done = False
-        end = self.group + n_num
-        while not done:
-            temp = nums.copy()
-            temp[start:n_num] = self.__list_of_numbers[position_for_new_n:end]
-            self.res.append(temp)
+        for group in self.groups:
+            res = []
+            nums = self.__list_of_numbers[start:group]
+            res.append(nums)
+            for n_num in range(1, group+1):
+                position_for_new_n = group
+                done = False
+                end = group + n_num
+                while not done:
+                    temp = nums.copy()
+                    temp[start:n_num] = self.__list_of_numbers[position_for_new_n:end]
+                    temp.sort()
+                    res.append(temp)
 
-            position_for_new_n += 1
-            end += 1
-            if position_for_new_n >= len(self.__list_of_numbers):
-                done = True
-        return self.res
+                    position_for_new_n += 1
+                    end += 1
+                    if position_for_new_n >= len(self.__list_of_numbers):
+                        done = True
+            self.res[Utils.to_string(group)] = res
 
 
 if __name__ == '__main__':
-    ns = [1, 2, 3, 4, 5, 6, 7, 8]
-    sets = 4
-    numbers = Numbers(list_of_numbers=ns, group=sets)
+    ns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    sets = [2, 3, 4, 5]
+    numbers = Numbers(list_of_numbers=ns, groups=sets)
 
     print(numbers.get_numbers())
