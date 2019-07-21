@@ -79,11 +79,3 @@ class Numbers(object):
                     if position_for_new_n >= len(self.__list_of_numbers):
                         done = True
             self.res[Utils.to_string(group)] = res
-
-
-if __name__ == '__main__':
-    ns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-    sets = [2, 3, 4, 5]
-    numbers = Numbers(list_of_numbers=ns, groups=sets)
-
-    print(numbers.get_numbers())
