@@ -34,13 +34,42 @@ class Email(object):
 
 
 class Numbers(object):
-    def __init__(self, list_of_numbers, list_of_sets):
+    def __init__(self, list_of_numbers, group):
         self.__list_of_numbers = list_of_numbers
-        self.list_of_sets = list_of_sets
+        self.group = group
 
-    def get_sets_and_numbers(self):
-        ##todo generate the sets and return them
-        res = {}
-        for set_item in self.list_of_sets:
-            res[set_item] = [2, 3, 4, 5, 12]
-        return res
+        self.res = []
+        self.__permutate_numbers()
+
+    def get_numbers(self):
+        return self.res
+
+    def __permutate_numbers(self):
+        start = 0
+        end = self.group
+        ns = self.__list_of_numbers[start:end]
+        self.res.append(ns)
+
+        position_for_new_n = end
+        done = False
+        item = start
+        while not done:
+            temp = ns.copy()
+            temp[item] = self.__list_of_numbers[position_for_new_n]
+            self.res.append(temp)
+
+            if item % self.group == 0:
+                item = 0
+                position_for_new_n += 1
+            if position_for_new_n == len(self.__list_of_numbers):
+                done = True
+
+        return self.res
+
+
+if __name__ == '__main__':
+    ns = [1, 2, 3, 4, 5, 6, 7, 8]
+    sets = 3
+    numbers = Numbers(list_of_numbers=ns, group=sets)
+
+    print(numbers.get_numbers())

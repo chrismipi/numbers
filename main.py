@@ -33,6 +33,10 @@ schedule.every().minute.do(run_every_minute)
 
 if __name__ == '__main__':
 
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    # while True:
+    #     schedule.run_pending()
+    #     time.sleep(1)
+    ns = [1, 2, 3, 4, 5, 6, 7, 8]
+    sets = 3
+    numbers = Numbers(list_of_numbers=ns, group=sets)
+
