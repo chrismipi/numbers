@@ -36,6 +36,7 @@ class Email(object):
 class Numbers(object):
     def __init__(self, list_of_numbers, group):
         self.__list_of_numbers = list_of_numbers
+        self.__list_of_numbers.sort()
         self.group = group
 
         self.res = []
@@ -46,30 +47,27 @@ class Numbers(object):
 
     def __permutate_numbers(self):
         start = 0
-        end = self.group
-        ns = self.__list_of_numbers[start:end]
-        self.res.append(ns)
-
-        position_for_new_n = end
+        n_num = 1
+        nums = self.__list_of_numbers[start:self.group]
+        self.res.append(nums)
+        position_for_new_n = self.group
         done = False
-        item = start
+        end = self.group + n_num
         while not done:
-            temp = ns.copy()
-            temp[item] = self.__list_of_numbers[position_for_new_n]
+            temp = nums.copy()
+            temp[start:n_num] = self.__list_of_numbers[position_for_new_n:end]
             self.res.append(temp)
 
-            if item % self.group == 0:
-                item = 0
-                position_for_new_n += 1
-            if position_for_new_n == len(self.__list_of_numbers):
+            position_for_new_n += 1
+            end += 1
+            if position_for_new_n >= len(self.__list_of_numbers):
                 done = True
-
         return self.res
 
 
 if __name__ == '__main__':
     ns = [1, 2, 3, 4, 5, 6, 7, 8]
-    sets = 3
+    sets = 4
     numbers = Numbers(list_of_numbers=ns, group=sets)
 
     print(numbers.get_numbers())
