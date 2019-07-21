@@ -3,11 +3,11 @@ import time
 from helpers import Numbers, Email
 
 
-def run_five_oclock():
+def run_five_o_clock():
     print('Running 17:00')
 
 
-def run_eleven_oclock():
+def run_eleven_o_clock():
     print('Running 17:00')
 
 
@@ -26,8 +26,8 @@ def run_every_minute():
     email.send()
 
 
-schedule.every().day.at("11:00").do(run_eleven_oclock)
-schedule.every().day.at("17:00").do(run_five_oclock)
+schedule.every().day.at("11:00").do(run_eleven_o_clock)
+schedule.every().day.at("17:00").do(run_five_o_clock)
 
 schedule.every().minute.do(run_every_minute)
 
