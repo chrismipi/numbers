@@ -1,6 +1,6 @@
 import schedule
 import time
-from helpers import Numbers, Email
+from helpers import Numbers, Email, FileReader
 
 
 def run_five_o_clock():
@@ -34,7 +34,14 @@ schedule.every().day.at("17:00").do(run_five_o_clock)
 schedule.every().minute.do(run_every_minute)
 
 if __name__ == '__main__':
-    while True:
-        schedule.run_pending()
-        time.sleep(1)
+    try:
+        file_reader = FileReader('file_sample.txt')
+        print(file_reader.get_content())
+    except Exception as ex:
+        print(ex)
+
+# if __name__ == '__main__':
+#     while True:
+#         schedule.run_pending()
+#         time.sleep(1)
 
