@@ -5,9 +5,15 @@ from sendgrid.helpers.mail import Mail
 
 
 class Email(object):
-    def __init__(self, to_email, body, from_email=None):
+    def __init__(self, to_email, body, from_email=None, cc_email=None):
         self.__to_email = to_email
+        self.__cc_email = cc_email
         self.__body = body
+
+        if cc_email is None:
+            self.__cc = False
+        else:
+            self.__cc = True
 
         if from_email is None:
             self.__from_email = 'numbers@mcmipi.xyz'
@@ -24,9 +30,12 @@ class Email(object):
             subject='[MCMIPIXYV] Numbers for Betting',
             html_content=self.__convert_to_html())
 
+        if self.__cc:
+            message.cc = self.__cc_email
+
         try:
             # sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-            sg = SendGridAPIClient('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')
+            sg = SendGridAPIClient('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')
             response = sg.send(message)
             print(response.status_code)
             print(response.body)
