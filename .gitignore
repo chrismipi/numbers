@@ -2,3 +2,4 @@ venv/
 .idea/
 email_api.txt
 __pycache__/
+numbers.txt

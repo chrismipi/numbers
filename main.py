@@ -26,10 +26,24 @@ def run_every_minute():
         sets = [2, 3, 4, 5]
         # Getting the numbers
         numbers = Numbers(list_of_numbers=nums, groups=sets)
+        nums = numbers.get_numbers()
+
+        # write to a file
+        content = ''
+
+        for k, v in nums.items():
+            content += k + '\n'
+            for num in v:
+                content += str(num) + '\n'
+            content += '\n'
+
+        out = open('numbers.txt', 'w')
+        out.write(content)
+        out.close()
 
         # Send the email
-        email = Email(to_email='christopher.mipi@gmail.com', body=numbers, cc_email='thembidmolotsi@gmail.com')
-        email.send()
+        # email = Email(to_email='christopher.mipi@gmail.com', body=numbers, cc_email='thembidmolotsi@gmail.com')
+        # email.send()
 
         print('Sent...')
 
@@ -43,12 +57,15 @@ schedule.every().day.at("17:00").do(run_five_o_clock)
 schedule.every().minute.do(run_every_minute)
 
 if __name__ == '__main__':
-    try:
-        print('Starting the app')
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
-    except KeyboardInterrupt:
-        print('Stopping the app.')
-    except Exception as ex:
-        print('Something happened {}'.format(ex))
+    run_every_minute()
+
+# if __name__ == '__main__':
+#     try:
+#         print('Starting the app')
+#         while True:
+#             schedule.run_pending()
+#             time.sleep(1)
+#     except KeyboardInterrupt:
+#         print('Stopping the app.')
+#     except Exception as ex:
+#         print('Something happened {}'.format(ex))
