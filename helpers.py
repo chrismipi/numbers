@@ -23,8 +23,7 @@ class Email(object):
             html_content=self.__convert_to_html())
 
         try:
-            # sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY'))
-            sg = SendGridAPIClient('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')
+            # sg = SendGridAPIClient(os.environ.get('SENDGRID_API_KEY')
             response = sg.send(message)
             print(response.status_code)
             print(response.body)
